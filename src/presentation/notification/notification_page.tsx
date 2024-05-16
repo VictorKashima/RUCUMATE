@@ -9,7 +9,7 @@ export const NotificationComponent: React.FC = () => {
         const fetchData = async () => {
             try {
                 const user_id = localStorage.getItem('user_id');
-                const response = await fetch(`https://rucumate.herokuapp.com/esp/data/id/user/${user_id}`);
+                const response = await fetch(`https://rucumate-api.vercel.app/esp/data/id/user/${user_id}`);
                 const data = await response.json();
 
                 const newNotifications: string[] = [];
@@ -68,7 +68,7 @@ export const NotificationComponent: React.FC = () => {
 
     const sendNotification = async (content: string, user_id: any) => {
         try {
-            await fetch('https://rucumate.herokuapp.com/notification/generate', {
+            await fetch('https://rucumate-api.vercel.app/notification/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -23,7 +23,7 @@ export const MoistureComponent: React.FC = () => {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    `https://rucumate.herokuapp.com/esp/data/id/user/${user_id}`
+                    `https://rucumate-api.vercel.app/esp/data/id/user/${user_id}`
                 );
                 const data = await response.json();
                 setSlides(data);
@@ -38,11 +38,11 @@ export const MoistureComponent: React.FC = () => {
                 const user_id = localStorage.getItem('user_id'); // Obter o user_id armazenado localmente
 
                 if (endpoint.endsWith('temperatura')) {
-                    const response = await fetch(`https://rucumate.herokuapp.com/esp/data/id/user/${user_id}`);
+                    const response = await fetch(`https://rucumate-api.vercel.app/esp/data/id/user/${user_id}`);
                     const data = await response.json();
                     seriesData = data.map((entry: any) => entry.temperature);
                 } else if (endpoint.endsWith('umidade')) {
-                    const response = await fetch(`https://rucumate.herokuapp.com/esp/data/id/user/${user_id}`);
+                    const response = await fetch(`https://rucumate-api.vercel.app/esp/data/id/user/${user_id}`);
                     const data = await response.json();
                     seriesData = data.map((entry: any) => entry.humidity);
                 }

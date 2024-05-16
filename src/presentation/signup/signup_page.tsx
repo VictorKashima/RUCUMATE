@@ -33,27 +33,44 @@ export const SignupComponent: React.FC = () => {
             return;
         }
 
-        const url = "https://rucumate.herokuapp.com/user/register";
+        console.log(email, password)
 
-        const config = {
+        const url = "https://rucumate-api.vercel.app/user/register";
+
+        fetch(url, {
             method: "POST",
+            mode: "cors",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "access-control-allow-origin": "*"
             },
             body: JSON.stringify({
-                "username": username,
+                // "username": username,
                 "email": email,
-                "passwd": password
+                "password": password
             })
-        };
+ })
 
-        fetch(url, config)
-            .then(() => {
-                window.location.href = "/login";
-            })
-            .catch(() => {
-                setShowModal(true);
-            });
+        // const config = {
+        //     mode: "no-cors",
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //         // "username": username,
+        //         "email": email,
+        //         "password": password
+        //     })
+        // };
+
+        // fetch(url, config)
+        //     .then(() => {
+        //         window.location.href = "/login";
+        //     })
+        //     .catch(() => {
+        //         setShowModal(true);
+        //     });
     }
 
     const closeModal = () => {

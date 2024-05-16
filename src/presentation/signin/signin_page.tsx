@@ -23,7 +23,7 @@ export const SigninComponent: React.FC = () => {
             return;
         }
 
-        const url = "https://rucumate.herokuapp.com/user/login";
+        const url = "https://rucumate-api.vercel.app/user/login";
 
         const config = {
             method: "POST",
@@ -32,7 +32,7 @@ export const SigninComponent: React.FC = () => {
             },
             body: JSON.stringify({
                 "email": email,
-                "passwd": password
+                "password": password
             })
         };
 

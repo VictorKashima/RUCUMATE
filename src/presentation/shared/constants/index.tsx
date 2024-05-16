@@ -47,14 +47,14 @@ export const features = [
         icon: shield,
         title: "Alta Eficácia",
         content:
-            " Permitindo que você tome ações rápidas e efetivas para garantir o máximo crescimento e produtividade das suas plantas",
+            "Permitindo que você tome ações rápidas e efetivas para garantir o máximo crescimento e produtividade das suas plantas",
     },
     {
         id: "feature-3",
         icon: send,
         title: "Envio de Notificações",
         content:
-            "Enviaremos notificações em tempo real sobre as condições ambientais ideais para suas plantações. ",
+            "Enviaremos notificações em tempo real sobre as condições ambientais ideais para suas plantações.",
     },
 ];
 
@@ -63,7 +63,7 @@ export const feedback = [
         id: "feedback-1",
         content:
             "Estou impressionado com a precisão e facilidade de uso da solução de monitoramento.Agora tenho controle quase que total sobre minhas plantações, o que está fazendo toda a diferença no crescimento das minhas colheitas.",
-        name: "Julia mayumi",
+        name: "Julia Mayumi",
         title: "Gramado SC",
         img: people01,
     },
@@ -71,8 +71,8 @@ export const feedback = [
         id: "feedback-2",
         content:
             "O serviço de monitoramento superou todas as minhas expectativas. Através da plataforma web e do app consigo acompanhar em tempo real as condições do ar e umidade.",
-        name: "pabblo fondilha",
-        title: " Juis de Fora MG",
+        name: "Pabblo Fondilha",
+        title: "Juis de Fora MG",
         img: people02,
     },
     {
@@ -129,8 +129,9 @@ export const footerLinks = [
             },
         ],
     },
+
     {
-        title: "Equipe",
+        title: "Equipe 01",
         links: [
             {
                 image: git1,
@@ -164,6 +165,41 @@ export const footerLinks = [
             },
             {
                 image: git7,
+                name: "Victor Kashima",
+                link: "https://github.com/VictorKashima/",
+            },
+        ],
+    },
+    {
+        title: "Equipe 02",
+        links: [
+            {
+                image: git1,
+                name: "Giovanni Giuseppe",
+                link: "https://github.com/giogiuseppe",
+            },
+            {
+                image: git2,
+                name: "Jefferson Vargas",
+                link: "https://github.com/JeffeVargasP",
+            },
+            {
+                image: git3,
+                name: "José Augusto",
+                link: "https://github.com/JoseAugusto83",
+            },
+            {
+                image: git4,
+                name: "Lucas Tamura",
+                link: "https://github.com/lucastamura",
+            },
+            {
+                image: git5,
+                name: "Matheus Morandi",
+                link: "https://github.com/MatheusMorandi/",
+            },
+            {
+                image: git6,
                 name: "Victor Kashima",
                 link: "https://github.com/VictorKashima/",
             },
