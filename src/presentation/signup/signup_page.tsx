@@ -42,7 +42,7 @@ export const SignupComponent: React.FC = () => {
             mode: "cors",
             headers: {
                 "Content-Type": "application/json",
-                "access-control-allow-origin": "*"
+                "Access-Control-Allow-Origin": "*"
             },
             body: JSON.stringify({
                 // "username": username,
