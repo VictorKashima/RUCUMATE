@@ -26,51 +26,33 @@ export const SignupComponent: React.FC = () => {
     const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setConfirmPassword(event.target.value);
     };
-
+    
     const handleClick = () => {
         if (!email || !password) {
             setShowModal(true);
             return;
         }
-
-        console.log(email, password)
-
+        
         const url = "https://rucumate-api.vercel.app/user/register";
-
-        fetch(url, {
+        const config = {
             method: "POST",
-            mode: "cors",
             headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                // "username": username,
+                "name": username,
                 "email": email,
                 "password": password
             })
- })
+        };
 
-        // const config = {
-        //     mode: "no-cors",
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         // "username": username,
-        //         "email": email,
-        //         "password": password
-        //     })
-        // };
-
-        // fetch(url, config)
-        //     .then(() => {
-        //         window.location.href = "/login";
-        //     })
-        //     .catch(() => {
-        //         setShowModal(true);
-        //     });
+        fetch(url, config)
+            .then(() => {
+                window.location.href = "/login";
+            })
+            .catch(() => {
+                setShowModal(true);
+            });
     }
 
     const closeModal = () => {

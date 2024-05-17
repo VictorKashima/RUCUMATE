@@ -41,6 +41,7 @@ export const SigninComponent: React.FC = () => {
             .then((data) => {
                 if (data.message === "Authentication successful") {
                     window.localStorage.setItem("user_id", data.user.id)
+                    window.localStorage.setItem("user_name", data.user.name)
                     window.location.href = 'umidade';
                 } else {
                     setShowModal(true);

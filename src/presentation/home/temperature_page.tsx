@@ -11,6 +11,7 @@ export const TemperatureComponent: React.FC = () => {
     interface ItemData {
         id: number;
         user_id: string;
+        user_name: string;
         temperature: string;
         humidity: string;
         createdAt: Date;
@@ -18,6 +19,7 @@ export const TemperatureComponent: React.FC = () => {
 
     const [slides, setSlides] = useState<ItemData[]>([]);
     const user_id = window.localStorage.getItem("user_id");
+    // const user_name = window.localStorage.getItem("user_name");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -235,7 +237,7 @@ export const TemperatureComponent: React.FC = () => {
                         slides.map((slide: ItemData) => (
                             <div className='flex flex-col bg-[#202124] text-white rounded-lg p-2.5 m-2.5'>
                                 <span>ID: {slide.id}</span>
-                                <span>Usuário {slide.user_id}</span>
+                                <span>Usuário {slide.user_name}</span>
                                 <div className='mb-2'>
                                     <span>Temperatura: {getModelInfo(slide)}°C</span>
                                 </div>
