@@ -180,6 +180,7 @@ export const TemperatureComponent: React.FC = () => {
                 <div className={`hidden lg:flex lg:gap-x-6 ${isMenuOpen ? 'block' : 'hidden'}`}>
                     <a href='/umidade' className="font-semibold text-white cursor-pointer border-b-2 border-transparent transition-all duration-150 hover:border-gray-500">Úmidade</a>
                     <a href='/temperatura' className="font-semibold text-white cursor-pointer border-b-2 border-transparent transition-all duration-150 hover:border-gray-500">Temperatura</a>
+                    <a href='/luminosidade' className="font-semibold text-white cursor-pointer border-b-2 border-transparent transition-all duration-150 hover:border-gray-500">Luminosidade</a>
                     <a href='/notificacao' className="font-semibold text-white cursor-pointer border-b-2 border-transparent transition-all duration-150 hover:border-gray-500">Notificações</a>
                 </div>
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">

@@ -5,6 +5,7 @@ import { SignupPage } from './presentation/signup/components/signup';
 import { MoisturePage } from './presentation/home/components/moisture';
 import { TemperaturePage } from './presentation/home/components/temperature';
 import { NotificationPage } from './presentation/notification/components/notification';
+import LuminosityPage from './presentation/home/luminosity_page';
 
 export const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ export const App: React.FC = () => {
         <Route path="/umidade" element={<MoisturePage />} />
         <Route path="/temperatura" element={<TemperaturePage />} />
         <Route path="/notificacao" element={<NotificationPage />} />
+        <Route path="/luminosidade" element={<LuminosityPage />} />
       </Routes>
     </Router>
   );
