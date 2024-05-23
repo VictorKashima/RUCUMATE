@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import {useState } from 'react';
 import Logo from '../../assets/images/logo.svg';
 
 function LuminosityPage() {
