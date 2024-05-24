@@ -200,6 +200,7 @@ export const TemperatureComponent: React.FC = () => {
                         <div className="py-6">
                             <a href='/umidade' className="block rounded-lg px-3 py-2 font-semibold text-white cursor-pointer transition-all duration-150 hover:bg-gray-500">Úmidade</a>
                             <a href='/temperatura' className="block rounded-lg px-3 py-2 font-semibold text-white cursor-pointer transition-all duration-150 hover:bg-gray-500">Temperatura</a>
+                            <a href='/luminosidade' className="block rounded-lg px-3 py-2 font-semibold text-white cursor-pointer transition-all duration-150 hover:bg-gray-500">Luminosidade</a>
                             <a href='/notificacao' className="block rounded-lg px-3 py-2 font-semibold text-white cursor-pointer transition-all duration-150 hover:bg-gray-500">Notificações</a>
                         </div>
                         <div className="py-6">
