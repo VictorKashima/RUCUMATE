@@ -227,7 +227,7 @@ export const MoistureComponent: React.FC = () => {
                             </svg>
                         </div>
                         <div>
-                            <span className='text-white'>Não há dados relacionados à úmidade para exibir.</span>
+                            <span className='text-white'>Não há dados relacionados à umidade para exibir.</span>
                         </div>
                     </div>
                 )}
