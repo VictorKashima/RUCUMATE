@@ -9,23 +9,24 @@ export const TemperatureComponent: React.FC = () => {
     const chartRef = useRef(null);
 
     interface ItemData {
-        id: number;
+        sensorId: number;
         user_id: string;
         user_name: string;
         temperature: string;
         humidity: string;
+        luminosity: string;
         createdAt: Date;
     }
 
     const [slides, setSlides] = useState<ItemData[]>([]);
     const user_id = window.localStorage.getItem("user_id");
-    // const user_name = window.localStorage.getItem("user_name");
+    const user_name = window.localStorage.getItem("user_name");
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    `https://rucumate-api.vercel.app/esp/data/id/user/${user_id}`
+                    `https://rucumate-api.vercel.app/esp/sensor/id/user/${user_id}`
                 );
                 const data = await response.json();
                 setSlides(data);
@@ -40,11 +41,11 @@ export const TemperatureComponent: React.FC = () => {
                 const user_id = localStorage.getItem('user_id'); // Obter o user_id armazenado localmente
 
                 if (endpoint.endsWith('temperatura')) {
-                    const response = await fetch(`https://rucumate-api.vercel.app/esp/data/id/user/${user_id}`);
+                    const response = await fetch(`https://rucumate-api.vercel.app/esp/sensor/id/user/${user_id}`);
                     const data = await response.json();
                     seriesData = data.map((entry: any) => entry.temperature);
                 } else if (endpoint.endsWith('umidade')) {
-                    const response = await fetch(`https://rucumate-api.vercel.app/esp/data/id/user/${user_id}`);
+                    const response = await fetch(`https://rucumate-api.vercel.app/esp/sensor/id/user/${user_id}`);
                     const data = await response.json();
                     seriesData = data.map((entry: any) => entry.humidity);
                 }
@@ -238,8 +239,8 @@ export const TemperatureComponent: React.FC = () => {
                     {slides.length > 0 ? (
                         slides.map((slide: ItemData) => (
                             <div className='flex flex-col bg-[#202124] text-white rounded-lg p-2.5 m-2.5'>
-                                <span>ID: {slide.id}</span>
-                                <span>Usuário {slide.user_name}</span>
+                                <span>ID: {slide.sensorId}</span>
+                                <span>Usuário {user_name}</span>
                                 <div className='mb-2'>
                                     <span>Temperatura: {getModelInfo(slide)}°C</span>
                                 </div>
