@@ -31,11 +31,7 @@ function LuminosityPage() {
         const response = await fetch(
           `https://rucumate-api.vercel.app/esp/sensor/id/user/${user_id}`
         );
-        const thereisNotification = await fetch(
-          `https://rucumate-api.vercel.app/esp/notification/user/${user_id}`
-        );
-        const dataNotification = await thereisNotification.json();
-        const data = await dataNotification.json();
+        const data = await response.json();
         setSlides(data);
       } catch (error) {
         console.log("Error fetching data:", error);
