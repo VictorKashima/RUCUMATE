@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Logo from "../../assets/images/logo.svg";
 import * as echarts from "echarts";
 
-export const LuminosityComponent: React.FC = () => {
+export const LuminosityPage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const chartRef = useRef(null);
