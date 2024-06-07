@@ -1,19 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Logo from "../../assets/images/logo.svg";
 import * as echarts from "echarts";
 
-function LuminosityPage() {
+export const LuminosityComponent: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const chartRef = useRef(null);
 
   interface ItemData {
     sensorId: number;
-    user_id: string;
     user_name: string;
     temperature: string;
     humidity: string;
@@ -31,8 +26,8 @@ function LuminosityPage() {
         const response = await fetch(
           `https://rucumate-api.vercel.app/esp/sensor/id/user/${user_id}`
         );
-        const data = await response.json();
-        setSlides(data);
+        const dataResponse = await response.json();
+        setSlides(dataResponse);
       } catch (error) {
         console.log("Error fetching data:", error);
       }
@@ -41,7 +36,7 @@ function LuminosityPage() {
       try {
         const endpoint = window.location.href;
         let seriesData = [];
-        const user_id = localStorage.getItem("user_id"); // Obter o user_id armazenado localmente
+        const user_id = localStorage.getItem("user_id");
 
         if (endpoint.endsWith("temperatura")) {
           const response = await fetch(
@@ -55,12 +50,11 @@ function LuminosityPage() {
           );
           const data = await response.json();
           seriesData = data.map((entry: any) => entry.humidity);
-        } else if (endpoint.endsWith("luminosidade")) {
+        } else if (endpoint.endsWith('luminosidade')) {
           const response = await fetch(
             `https://rucumate-api.vercel.app/esp/sensor/id/user/${user_id}`
           );
           const data = await response.json();
-          seriesData = data.map((entry: any) => entry.luminosity);
         }
 
         if (chartRef.current) {
@@ -74,7 +68,7 @@ function LuminosityPage() {
             yAxis: {
               type: "value",
               axisLabel: {
-                formatter: "{value}",
+                formatter: "{value} %",
               },
             },
             series: [
@@ -114,7 +108,7 @@ function LuminosityPage() {
           };
 
           // Verificar se é temperatura e ajustar os valores da linha pontilhada
-          if (endpoint.endsWith("temperatura")) {
+          if (endpoint.endsWith("luminosidade")) {
             option.series[1].markLine.data = [
               { yAxis: 0, lineStyle: { color: "#00960A" } }, // Valor mínimo (inferior)
               { yAxis: 50, lineStyle: { color: "#00960A" } }, // Valor máximo (superior)
@@ -148,7 +142,7 @@ function LuminosityPage() {
     } else if (window.location.pathname === "/umidade") {
       return slide.humidity;
     } else if (window.location.pathname === "/luminosidade") {
-        return slide.luminosity;
+      return slide.luminosity;
     } else {
       return "Modelo não especificado";
     }
@@ -162,16 +156,20 @@ function LuminosityPage() {
       const createdAt = new Date(slide.createdAt);
       return createdAt.toLocaleString();
     } else if (window.location.pathname === "/luminosidade") {
-        const createdAt = new Date(slide.createdAt);
-        return createdAt.toLocaleString();
+      const createdAt = new Date(slide.createdAt);
+      return createdAt.toLocaleDateString();
     } else {
       return "Modelo não especificado";
     }
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <>
-      <nav className="flex items-center justify-between mx-auto w-full max-w-7xl p-3 absolute top-0 left-0 right-0 z-10">
+      <nav className="flex items-center justify-between mx-auto max-w-7xl p-3">
         <div className="flex lg:flex-1">
           <img className="h-8 w-auto" src={Logo} alt="..." />
         </div>
@@ -318,46 +316,60 @@ function LuminosityPage() {
           </div>
         </div>
       </div>
-      <div className='flex flex-col items-center justify-center mx-auto w-full max-w-3xl'>
-                {slides.length > 0 ? (
-                    <div ref={chartRef} style={{ width: '100%', maxWidth: '700px', height: '400px' }} />
-                ) : (
-                    <div className="flex items-center justify-center rounded-xl bg-[#202124] gap-2 p-2 px-5 m-5">
-                        <div className='flex items-center justify-center rounded-full bg-[#404041] p-2'>
-                            <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <span className='text-white'>Não há dados relacionados à temperatura para exibir.</span>
-                        </div>
-                    </div>
-                )}
-                <h1 className='font-semibold text-2xl text-white text-center m-2'>Informações e últimas atualizações</h1>
-                <div className='w-full h-72 overflow-auto'>
-                    {slides.length > 0 ? (
-                        slides.map((slide: ItemData) => (
-                            <div className='flex flex-col bg-[#202124] text-white rounded-lg p-2.5 m-2.5'>
-                                <span>ID: {slide.sensorId}</span>
-                                <span>Usuário {user_name}</span>
-                                <div className='mb-2'>
-                                    <span>Luminosidade: {getModelInfo(slide)}</span>
-                                </div>
-                                <hr />
-                                <div className='mt-2'>
-                                    <span>Data e horário: {getModelDate(slide)}</span>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <></>
-                    )}
-                </div>
+      <div className="flex flex-col items-center justify-center mx-auto w-full max-w-3xl">
+        {slides.length > 0 ? (
+          <div
+            ref={chartRef}
+            style={{ width: "100%", maxWidth: "700px", height: "400px" }}
+          />
+        ) : (
+          <div className="flex items-center justify-center rounded-xl bg-[#202124] gap-2 p-2 px-5 m-5">
+            <div className="flex items-center justify-center rounded-full bg-[#404041] p-2">
+              <svg
+                className="h-6 w-6 text-red-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                />
+              </svg>
             </div>
+            <div>
+              <span className="text-white">
+                Não há dados relacionados à umidade para exibir.
+              </span>
+            </div>
+          </div>
+        )}
+        <h1 className="font-semibold text-2xl text-white text-center m-2">
+          Informações e últimas atualizações
+        </h1>
+        <div className="w-full h-72 overflow-auto">
+          {slides.length > 0 ? (
+            slides.map((slide: ItemData) => (
+              <div className="flex flex-col bg-[#202124] text-white rounded-lg p-2.5 m-2.5">
+                <span>ID: {slide.sensorId}</span>
+                <span>Usuário {user_name}</span>
+                <div className="mb-2">
+                  <span>Luminosidade: {getModelInfo(slide)}%</span>
+                </div>
+                <hr />
+                <div className="mt-2">
+                  <span>Data e horário: {getModelDate(slide)}</span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>
     </>
   );
-}
-
-export default LuminosityPage;
+};
