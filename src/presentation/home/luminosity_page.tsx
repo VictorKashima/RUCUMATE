@@ -55,6 +55,7 @@ export const LuminosityComponent: React.FC = () => {
             `https://rucumate-api.vercel.app/esp/sensor/id/user/${user_id}`
           );
           const data = await response.json();
+          seriesData = data.map((entry: any) => entry.luminosity);
         }
 
         if (chartRef.current) {
